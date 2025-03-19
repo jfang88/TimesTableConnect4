@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connect 4 Times Table</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="instructions" style="display:block;">
+        <h1>Connect 4 - Times Table Edition</h1>
+        <p>Welcome!  This is Connect 4 with a twist.  To place a tile, you must first answer a times table question correctly.</p>
+        <p>Each player chooses a name and gets a different colored tile.</p>
+        <p>Get four tiles in a row (horizontally, vertically, or diagonally) to win!</p>
+        <button id="closeInstructions">Close Instructions</button>
+    </div>
+
+    <div id="nameEntry" style="display:block;">
+        <h2>Enter Player Names:</h2>
+        <label for="player1Name">Player 1:</label>
+        <input type="text" id="player1Name" value="Player 1"><br><br>
+        <label for="player2Name">Player 2:</label>
+        <input type="text" id="player2Name" value="Player 2"><br><br>
+        <button id="startGame">Start Game</button>
+    </div>
+
+    <div id="gameBoardContainer" style="display:none;">
+        <h1>Connect 4 - Times Table Edition</h1>
+        <div id="gameBoard"></div>
+        <div id="questionArea">
+            <p id="question"></p>
+            <input type="number" id="answer">
+            <button id="submitAnswer">Submit Answer</button>
+        </div>
+        <p id="message"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+#gameBoard {
+    display: grid;
+    grid-template-columns: repeat(7, 50px); /* 7 columns */
+    grid-gap: 5px;
+    margin: 20px auto;
+    width: 350px;
+}
+
+.tile {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.player1 {
+    background-color: red;
+}
+
+.player2 {
+    background-color: blue;
+}
+
+#questionArea {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#message {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#instructions {
+    width: 80%;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+}
+
+#nameEntry {
+    width: 50%;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+}
