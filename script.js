@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let player2Name = "Player 2";
     let gameOver = false;
 
+    let currentQuestion = { num1: 0, num2: 0, correctAnswer: 0 }; // Store the current question
+
     closeInstructionsButton.addEventListener('click', () => {
         instructionsDiv.style.display = 'none';
         nameEntryDiv.style.display = 'block';
@@ -45,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPlayer = 1;
         gameOver = false;
         messageElement.textContent = `${player1Name}'s turn (Red)`;
+        generateQuestion(); // Generate the first question
     }
 
     function renderBoard() {
@@ -75,8 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const row = parseInt(event.target.dataset.row);
         const col = parseInt(event.target.dataset.col);
 
-        console.log("Tile clicked:", row, col);  // Debugging
-
         if (board[row][col] === 0) { // Only allow click on empty tiles
             askQuestion(row, col);
         } else {
@@ -84,26 +85,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function generateQuestion() {
+        currentQuestion.num1 = Math.floor(Math.random() * 12) + 1;
+        currentQuestion.num2 = Math.floor(Math.random() * 12) + 1;
+        currentQuestion.correctAnswer = currentQuestion.num1 * currentQuestion.num2;
+        questionElement.textContent = `What is ${currentQuestion.num1} x ${currentQuestion.num2}?`;
+    }
+
     function askQuestion(row, col) {
-        console.log("askQuestion called"); // Debugging
-
-        const num1 = Math.floor(Math.random() * 12) + 1;
-        const num2 = Math.floor(Math.random() * 12) + 1;
-        const correctAnswer = num1 * num2;
-
-        console.log("Question:", num1, "x", num2, "=", correctAnswer); // Debugging
-
-        questionElement.textContent = `What is ${num1} x ${num2}?`;
 
         submitAnswerButton.onclick = () => {
             const userAnswer = parseInt(answerInput.value);
             answerInput.value = ""; // Clear the input
 
-            if (userAnswer === correctAnswer) {
+            if (userAnswer === currentQuestion.correctAnswer) {
                 placeTile(row, col);
+                generateQuestion(); // New question after correct answer
             } else {
                 messageElement.textContent = "Incorrect! Other player's turn.";
                 switchPlayer();
+                // If the other player already answered wrong on this question.
+                submitAnswerButton.onclick = () => {
+                  generateQuestion(); // new question after both players are wrong
+                }
+
             }
         };
     }
